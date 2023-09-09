@@ -1,4 +1,4 @@
-name: bloc
+name: bloc_flutter
 description: A new Flutter project.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -34,6 +34,7 @@ dependencies:
     sdk: flutter
   flutter_widget_from_html: ^0.10.3
   rxdart: ^0.27.7
+  flutter_bloc: ^8.1.3
 
 dev_dependencies:
   flutter_lints: ^2.0.0
