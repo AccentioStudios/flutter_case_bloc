@@ -8,15 +8,18 @@ abstract class SearchCepRepository {
 class SearchCepRepositoryImp implements SearchCepRepository {
   @override
   Future<CepResult> searchCep(String cep) async {
-    final response = await Dio()
-        .get('https://viacep.com.br/ws/$cep/json/')
-        .catchError((error) => throw 'Invalid CEP');
+    try {
+      // Send an HTTP GET request to the ViaCEP API.
+      final response = await Dio().get('https://viacep.com.br/ws/$cep/json/');
 
-    if (response.statusCode == 200) {
-      return response.data['erro'] == 'true'
-          ? throw 'CEP not found'
-          : CepResult.fromJson(response.data);
+      // Parse the JSON response into a CepResult.
+      return CepResult.fromJson(response.data);
+    } on DioException {
+      // Handle Dio HTTP client exceptions (network or request issues).
+      throw 'Bad CEP code';
+    } catch (_) {
+      // Handle other unexpected errors.
+      throw 'Connection error';
     }
-    throw 'Connection error';
   }
 }
