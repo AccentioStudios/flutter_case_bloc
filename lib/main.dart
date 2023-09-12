@@ -1,13 +1,18 @@
-import 'package:bloc/pages/home_page.dart';
 // import 'package:bloc/pages/home_page_bloc.dart';
 import 'package:flutter/material.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:flutter_case_bloc/bloc/flutter_bloc/search_bloc_bloc.dart';
+// import 'package:flutter_case_bloc/pages/home_page.dart';
+import 'package:flutter_case_bloc/pages/home_page_bloc.dart';
+import 'package:flutter_case_bloc/repository/search_cep_repository.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final repository = SearchCepRepositoryImp();
+  MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,7 +22,14 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      // ? Bloc
+      home: const HomePageBloc(),
+
+      // ! Flutter_Bloc
+      // home: BlocProvider(
+      //   create: (context) => SearchBlocBloc(repository: repository),
+      //   child: const HomePageBloc(),
+      // ),
     );
   }
 }
